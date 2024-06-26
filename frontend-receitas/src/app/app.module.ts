@@ -6,8 +6,8 @@ import { AppComponent } from './app.component';
 import { CustomSidenavComponent } from './components/custom-sidenav/custom-sidenav.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {MatSidenav, MatSidenavContainer, MatSidenavModule} from "@angular/material/sidenav";
-import {MatCard, MatCardContent, MatCardFooter} from "@angular/material/card";
-import {MatButton, MatIconButton} from "@angular/material/button";
+import {MatCard, MatCardContent, MatCardFooter, MatCardModule} from "@angular/material/card";
+import {MatButton, MatButtonModule, MatIconButton} from "@angular/material/button";
 import {MatIcon, MatIconModule} from "@angular/material/icon";
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatListItem, MatListModule, MatNavList} from "@angular/material/list";
@@ -20,6 +20,11 @@ import {MAT_DATE_LOCALE} from "@angular/material/core";
 import {RecipeHttpServiceService} from "./service/recipe-http-service.service";
 import {HttpClientModule} from "@angular/common/http";
 import { AddRecipeComponent } from './pages/add-recipe/add-recipe.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -35,6 +40,7 @@ import { AddRecipeComponent } from './pages/add-recipe/add-recipe.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
     MatSidenavContainer,
     MatSidenav,
     MatCard,
@@ -48,8 +54,14 @@ import { AddRecipeComponent } from './pages/add-recipe/add-recipe.component';
     MatSidenavModule,
     MatListModule,
     MatIconModule,
+    MatTooltipModule,
+    MatButtonModule,
     MatCardFooter,
-    MatMenuModule
+    MatMenuModule,
+    MatFormFieldModule,
+    MatCardModule,
+    MatInputModule,
+    MatSelectModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: `pt-BR`},

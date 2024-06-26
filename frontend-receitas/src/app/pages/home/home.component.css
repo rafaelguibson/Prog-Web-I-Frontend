@@ -1,7 +1,6 @@
 .containers{
   width: 90%;
   margin:0 auto;
-  padding-top:20px;
 }
 .policy{
   background: #ECEBE9;
@@ -63,7 +62,7 @@
   background: #fff;
   padding: 20px;
   border-radius: 5px;
-  border-bottom: 1px solid #a8a8a8;
+  border: 1px solid #dcdcdc;
   position: relative;
   margin-bottom: 15px;
   height: 545px;

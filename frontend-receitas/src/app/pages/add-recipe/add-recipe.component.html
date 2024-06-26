@@ -1,37 +1,103 @@
-<div class="containers">
-  <div class="row" style="max-width: 100vw">
-  <div class="form-group">
-    <label class="col-md-2 control-label" for="Nome">Nome <h4>*</h4></label>
-    <div class="col-md-8">
-      <input id="Nome" name="Nome" placeholder="" class="form-control input-md" required="" type="text">
-    </div>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<div class="panel" style="border: none; overflow: hidden">
+  <div class="panel-heading dialog-title">
+    <span class="header-space">Adicionar Receita</span>
+    <a style="cursor: pointer;" (click)="fecharModal()"><i class="bi bi-x-circle-fill"
+                                                           matTooltip="Fechar Modal"></i></a>
   </div>
 
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-2 control-label" for="Nome">CPF <h4>*</h4></label>
-    <div class="col-md-2">
-      <input id="cpf" name="cpf" placeholder="Apenas números" class="form-control input-md" required="" type="text" maxlength="11" pattern="[0-9]+$">
-    </div>
+  <div class="panel-body">
+    <div class="form-group form-content">
+      <!-- FeedBack Field -->
+      <div class="alert alert-danger alert-dismissible" role="alert" *ngIf="showFeedbackPanel">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+             class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img"
+             aria-label="Warning:">
+          <path
+            d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+        </svg>
+        <strong>{{ errorMensagem }}</strong>
+      </div>
 
-    <label class="col-md-1 control-label" for="Nome">Nascimento<h4>*</h4></label>
-    <div class="col-md-2">
-      <input id="dtnasc" name="dtnasc" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
-    </div>
 
-    <!-- Multiple Radios (inline) -->
+      <form class="form" action="#" method="post">
 
-    <label class="col-md-1 control-label" for="radios">Sexo <h4>*</h4></label>
-    <div class="col-md-4">
-      <label required="" class="radio-inline" for="radios-0" >
-        <input name="sexo" id="sexo" value="feminino" type="radio" required>
-        Feminino
-      </label>
-      <label class="radio-inline" for="radios-1">
-        <input name="sexo" id="sexo" value="masculino" type="radio">
-        Masculino
-      </label>
+        <div class="form_grupo">
+          <label for="nome" class="form_label">Título:</label>
+          <input type="text" name="nome" class="form_input" id="nome" placeholder="Título da Receita" required>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form_grupo">
+
+              <label for="tipo" class="text">Tipo de Receita: </label>
+              <select name="tipo" class="dropdown" required style="height: 38px">
+
+                <option selected disabled class="form_select_option" value="">Selecione</option>
+                <option value="Solteiro" class="form_select_option">Café da Manhã</option>
+                <option value="Casado" class="form_select_option">Almoço</option>
+                <option value="Divorciado" class="form_select_option">Jantar</option>
+                <option value="Viúvo" class="form_select_option">Lanche</option>
+                <option value="Viúvo" class="form_select_option">Sobremesa</option>
+                <option value="Viúvo" class="form_select_option">Drink</option>
+              </select>
+
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form_grupo">
+              <label for="tempoPreparo" class="form_label">Tempo de Preparo:</label>
+              <input type="time" name="tempoPreparo" class="form_input" id="tempoPreparo" placeholder="Tempo de Preparo"
+                     required style="height: 38px">
+
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form_grupo">
+              <div class="form_message">
+                <label for="rendimento" class="form_label"> Rendimento (Porções):</label>
+                <input type="number" name="rendimento" class="form_input" id="rendimento" placeholder="Rendimento" required>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+        <div class="form_grupo">
+          <div class="form_message">
+
+            <label for="descricao" class="form_message_label"> Descrição:</label>
+            <textarea name="descricao" id="descricao" cols="30" rows="3" class="form_input message_input"
+                      required placeholder="Descrição resumida da receita"></textarea>
+
+          </div>
+        </div>
+
+        <div class="form_grupo">
+          <div class="form_message">
+
+            <label for="modo_preparo" class="form_message_label"> Modo de Preparo:</label>
+            <textarea name="modo_preparo" id="modo_preparo" cols="30" rows="3" class="form_input message_input"
+                      required placeholder="Modo de Preparo da receita"></textarea>
+
+          </div>
+        </div>
+
+      </form>
+
+      <!--      </div>&lt;!&ndash;container_form&ndash;&gt;-->
+      <!--      <mat-card-actions class="action-buttons">-->
+      <!--        <button mat-raised-button color="primary" type="submit" *ngIf="!isUpdate">Salvar</button>-->
+      <!--        <button mat-raised-button color="warn" type="button" (click)="onUpdate()" *ngIf="isUpdate">Salvar</button>-->
+      <!--        <button mat-raised-button color="warn" type="button" (click)="onCancel()">Cancelar</button>-->
+      <!--      </mat-card-actions>-->
     </div>
-  </div>
   </div>
 </div>

@@ -19,6 +19,7 @@ import { RecipeComponent } from './pages/recipe/recipe.component';
 import {MAT_DATE_LOCALE} from "@angular/material/core";
 import {RecipeHttpServiceService} from "./service/recipe-http-service.service";
 import {HttpClientModule} from "@angular/common/http";
+import { AddRecipeComponent } from './pages/add-recipe/add-recipe.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {HttpClientModule} from "@angular/common/http";
     HomeComponent,
     RegisterComponent,
     LoginComponent,
-    RecipeComponent
+    RecipeComponent,
+    AddRecipeComponent
   ],
   imports: [
     BrowserModule,

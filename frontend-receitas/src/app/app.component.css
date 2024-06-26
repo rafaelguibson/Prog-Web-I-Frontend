@@ -4,11 +4,9 @@ mat-toolbar {
   /*background-color: background: url("/assets/background.jpg");*/
   background-color: darkorange;
 }
-
-.content {
-  padding: 0px  ;
+mat-sidenav-content{
+  padding: 40px;
 }
-
 .content-card {
   margin-top: 15px;
   height: 75vh;
@@ -130,7 +128,7 @@ div#container {
   width: 100%;
   margin: 0 auto;
   color: black;
-  padding: 0px 20px 0px;
+  padding: 0 20px 0;
 }
 
 div#content {
@@ -163,17 +161,5 @@ div#footer {
   clear: both;
   width: 100%;
 }
-.row-div-content{
-  margin-left: 20px;
-  max-width: 88vw;
-}
-.slider-content{
-  height: 70vh;
-  width: 400px;
-  margin-bottom: 15px;
-}
-.contact-card{
-  height: 16vh;
-  border-radius: 9px;
-  width: 400px;
-}
+
+

@@ -1,12 +1,13 @@
-import {Ingredients} from "./ingredients";
+import {Ingredientes} from "./ingredientes";
 
-export interface Recipe {
+export interface Receita {
   id?: number;
   nome: string;
+  descricao: string;
   modoPreparo: string;
   tempoPreparo: number;
   rendimento: string;
   categoria: number;
   dataCadastro?: Date;
-  ingredientes: Ingredients[];
+  ingredientes: Ingredientes[];
 }

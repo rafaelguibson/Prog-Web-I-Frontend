@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import {NgxMaskDirective, NgxMaskPipe, provideNgxMask} from "ngx-mask";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CustomSidenavComponent } from './components/custom-sidenav/custom-sidenav.component';
@@ -16,6 +16,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RecipeComponent } from './pages/recipe/recipe.component';
+import {MAT_DATE_LOCALE} from "@angular/material/core";
+import {RecipeHttpServiceService} from "./service/recipe-http-service.service";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -29,6 +32,7 @@ import { RecipeComponent } from './pages/recipe/recipe.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     MatSidenavContainer,
     MatSidenav,
     MatCard,
@@ -46,7 +50,10 @@ import { RecipeComponent } from './pages/recipe/recipe.component';
     MatMenuModule
   ],
   providers: [
-    provideAnimationsAsync()
+    {provide: MAT_DATE_LOCALE, useValue: `pt-BR`},
+    provideAnimationsAsync(),
+    provideNgxMask(),
+    RecipeHttpServiceService
   ],
   bootstrap: [AppComponent]
 })

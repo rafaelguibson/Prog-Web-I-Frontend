@@ -64,7 +64,7 @@ mat-menu{
 }
 mat-card {
   background-color: rgb(247, 253, 255);
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 h1 {

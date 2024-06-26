@@ -64,6 +64,8 @@
   border-radius: 5px;
   border-bottom: 1px solid #a8a8a8;
   position: relative;
+  margin-bottom: 15px;
+  height: 545px;
   /*top: -100px;*/
 }
 .date{
@@ -123,6 +125,7 @@
   font-size: 14px;
   transition: all .3s ease;
   font-weight: 400;
+  height: 170px;
 }
 .read-more{
   color: #fff;

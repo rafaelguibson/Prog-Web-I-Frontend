@@ -12,11 +12,19 @@ import {MatIcon, MatIconModule} from "@angular/material/icon";
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatListItem, MatListModule, MatNavList} from "@angular/material/list";
 import {MatMenuModule} from "@angular/material/menu";
+import { HomeComponent } from './pages/home/home.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RecipeComponent } from './pages/recipe/recipe.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CustomSidenavComponent
+    CustomSidenavComponent,
+    HomeComponent,
+    RegisterComponent,
+    LoginComponent,
+    RecipeComponent
   ],
   imports: [
     BrowserModule,

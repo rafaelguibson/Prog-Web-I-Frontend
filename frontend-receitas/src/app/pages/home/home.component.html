@@ -1,5 +1,5 @@
 <div class="containers">
-  <div class="row">
+  <div class="row" style="width: 130%;">
     <div *ngFor="let item of recipe; let i = index" class="col-md-3">
       <div class="policy-p-card">
         <div class="date">
@@ -10,10 +10,12 @@
           <img src="/assets/p1.jpeg" alt="P1">
         </div>
         <h2>{{ item.nome }}</h2>
-        <p>
-          {{ item.descricao }}
-        </p>
-        <a href="#" class="read-more">Read More <i class="fa fa-caret-right"></i></a>
+        <div class="p-content">
+          <p>
+            {{ item.descricao }}
+          </p>
+        </div>
+        <a href="#" class="read-more">Continuar Lendo... <i class="fa fa-caret-right"></i></a>
       </div>
     </div>
   </div>

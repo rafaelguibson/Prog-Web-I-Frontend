@@ -29,14 +29,11 @@
   </mat-sidenav>
 
   <mat-sidenav-content class="content" [style.margin-left]="sidenavWidth()">
-    <div style="max-width: 99%">
-
-      <div id="container">
-        <div id="wrapper">
-              <router-outlet></router-outlet>
-        </div>
+<!--    <div style="max-width: 99%">-->
+    <div class="row row-div-content" >
+      <div class="col-md-3" style="width: 285px;">
         <div id="navigation">
-          <mat-card style="height: 100%">
+          <mat-card class="slider-content">
             <mat-card-content class="mat-elevation-z8" style="height: 100%">
               <p><strong>2. LISTAGEM DE IMAGENS</strong></p>
               <h3>IMAGENS RECEITAS</h3>
@@ -57,10 +54,9 @@
               </ul>
             </mat-card-content>
           </mat-card>
-        </div>
-        <div id="extra">
-          <mat-card>
-            <mat-card-content class="mat-elevation-z8" style="height: 16vh; border-radius: 9px">
+
+          <mat-card style="width: 400px;">
+            <mat-card-content class="mat-elevation-z8 contact-card">
               <p><strong>3. DADOS DE CONTATO</strong></p>
               <h3>ADICIONAR LINKS:</h3>
               <ul>
@@ -71,12 +67,21 @@
             </mat-card-content>
           </mat-card>
         </div>
-<!--        <div id="footer">-->
-<!--          <p>ADICIONAR INFORMAÇÕES RODA PÉ</p>-->
-<!--        </div>-->
+        <div id="extra" style=" width: 340px">
+
+        </div>
+      </div>
+      <div class="col-md-9" style="margin-top: 10px; ">
+
+          <router-outlet></router-outlet>
+
+      </div>
+    </div>
+      <div id="container">
+        <div id="footer">
+          <p>ADICIONAR INFORMAÇÕES RODA PÉ</p>
+        </div>
       </div>
       <script type="text/javascript">AddFillerLink("content", "navigation", "extra")</script>
-    </div>
-
   </mat-sidenav-content>
 </mat-sidenav-container>

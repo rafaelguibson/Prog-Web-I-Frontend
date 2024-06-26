@@ -64,6 +64,7 @@ mat-menu{
 }
 mat-card {
   background-color: rgb(247, 253, 255);
+  color: #212121
   /*overflow: hidden;*/
 }
 
@@ -161,4 +162,18 @@ div#extra {
 div#footer {
   clear: both;
   width: 100%;
+}
+.row-div-content{
+  margin-left: 20px;
+  max-width: 88vw;
+}
+.slider-content{
+  height: 70vh;
+  width: 400px;
+  margin-bottom: 15px;
+}
+.contact-card{
+  height: 16vh;
+  border-radius: 9px;
+  width: 400px;
 }

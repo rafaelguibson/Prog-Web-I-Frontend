@@ -21,13 +21,13 @@ export class CustomSidenavComponent {
 
   menuItems = signal<MenuItem[]>([
     {
-      icon: 'assignment',
-      label: 'Agendamentos',
+      icon: 'home',
+      label: 'Inicio',
       route: 'agendamentos'
     },
     {
-      icon: 'video_library',
-      label: 'Content',
+      icon: 'library_books',
+      label: 'Adicionar Receita',
       route: 'content'
     },
     {

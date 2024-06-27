@@ -18,7 +18,7 @@ export class AddRecipeComponent{
   errorMensagem: string = '';
   @ViewChild(MatTabGroup) tabGroup!: MatTabGroup;
 
-  constructor(private fb: FormBuilder, private receitaService: RecipeHttpServiceService) {
+  constructor(private fb: FormBuilder, private receitaService: RecipeHttpServiceService, @Inject(MAT_DIALOG_DATA) public data: {data: Receita}) {
     this.receitaForm = this.fb.group({
       nome: ['', Validators.required],
       descricao: ['', Validators.required],
@@ -46,7 +46,7 @@ export class AddRecipeComponent{
   saveIngrediente(index: number) {
     const ingredienteForm = this.ingredientes.at(index);
     const ingrediente: Ingrediente = {
-      id: 0, // id temporário, será gerado no backend
+
       nomeIngrediente: ingredienteForm.value.nomeIngrediente,
       quantidade: ingredienteForm.value.quantidade,
       unidadeMedida: ingredienteForm.value.unidadeMedida,

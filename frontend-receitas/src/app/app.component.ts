@@ -24,7 +24,7 @@ export class AppComponent {
       height: '650px',
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.openDialogSucsess();
+      // this.openDialogSucsess();
       this.recipeService.listarTodos().subscribe((data: Receita[]) => {
       });
     });

@@ -3,6 +3,7 @@ import {Receita} from "../../model/receita";
 import {RecipeHttpServiceService} from "../../service/recipe-http-service.service";
 import {AddRecipeComponent} from "../add-recipe/add-recipe.component";
 import {MatDialog} from "@angular/material/dialog";
+import {RecipeComponent} from "../recipe/recipe.component";
 
 @Component({
   selector: 'app-home',
@@ -21,4 +22,15 @@ export class HomeComponent implements OnInit{
     });
   }
 
+  openDialog(): void {
+    const dialogRef =  this.dialog.open(RecipeComponent, {
+      width: '800px',
+      height: '650px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      // this.openDialogSucsess();
+      this.recipeService.listarTodos().subscribe((data: Receita[]) => {
+      });
+    });
+  }
 }

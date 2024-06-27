@@ -14,6 +14,8 @@ import {MatTabGroup} from "@angular/material/tabs";
 export class AddRecipeComponent{
   receitaForm: FormGroup;
   ingredientesList: Ingrediente[] = [];
+  showFeedbackPanel: boolean = false;
+  errorMensagem: string = '';
   @ViewChild(MatTabGroup) tabGroup!: MatTabGroup;
 
   constructor(private fb: FormBuilder, private receitaService: RecipeHttpServiceService) {
@@ -67,7 +69,10 @@ export class AddRecipeComponent{
         console.log('Receita cadastrada com sucesso!', response);
         this.receitaForm.reset();
         this.ingredientesList = [];
-      });
+      },
+        (error) => {
+          this.showErrorMensage(error.error)
+        });
     }
   }
 
@@ -78,5 +83,17 @@ export class AddRecipeComponent{
   voltarParaReceita() {
     this.tabGroup.selectedIndex = 0; // seleciona a primeira aba (receita)
   }
+  showErrorMensage(msg: string ) {
+    this.errorMensagem = msg ;
+    this.showFeedbackPanel = true;
+    this.scheduleMessageClear();
+  }
 
+  // Função para agendar a limpeza da mensagem após 10 segundos
+  private scheduleMessageClear() {
+    setTimeout(() => {
+      this.errorMensagem = ''; // Limpar a mensagem após 5 segundos
+      this.showFeedbackPanel = false;
+    }, 5000); // 5000 milissegundos = 5 segundos
+  }
 }

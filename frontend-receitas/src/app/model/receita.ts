@@ -1,4 +1,4 @@
-import {Ingredientes} from "./ingredientes";
+import {Ingrediente} from "./ingrediente";
 
 export interface Receita {
   id?: number;
@@ -9,5 +9,5 @@ export interface Receita {
   rendimento: string;
   categoria: number;
   dataCadastro?: Date;
-  ingredientes: Ingredientes[];
+  ingredientes: Ingrediente[];
 }

@@ -4,100 +4,79 @@
 <div class="panel" style="border: none; overflow: hidden">
   <div class="panel-heading dialog-title">
     <span class="header-space">Adicionar Receita</span>
-    <a style="cursor: pointer;" (click)="fecharModal()"><i class="bi bi-x-circle-fill"
-                                                           matTooltip="Fechar Modal"></i></a>
+    <a style="cursor: pointer;"><i class="bi bi-x-circle-fill" matTooltip="Fechar Modal"></i></a>
   </div>
 
   <div class="panel-body">
-    <div class="form-group form-content">
-      <!-- FeedBack Field -->
-      <div class="alert alert-danger alert-dismissible" role="alert" *ngIf="showFeedbackPanel">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-             class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img"
-             aria-label="Warning:">
-          <path
-            d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-        </svg>
-        <strong>{{ errorMensagem }}</strong>
-      </div>
-
-
-      <form class="form" action="#" method="post">
-
-        <div class="form_grupo">
-          <label for="nome" class="form_label">Título:</label>
-          <input type="text" name="nome" class="form_input" id="nome" placeholder="Título da Receita" required>
-        </div>
-
-        <div class="row">
-          <div class="col-md-4">
-            <div class="form_grupo">
-
-              <label for="tipo" class="text">Tipo de Receita: </label>
-              <select name="tipo" class="dropdown" required style="height: 38px">
-
-                <option selected disabled class="form_select_option" value="">Selecione</option>
-                <option value="Solteiro" class="form_select_option">Café da Manhã</option>
-                <option value="Casado" class="form_select_option">Almoço</option>
-                <option value="Divorciado" class="form_select_option">Jantar</option>
-                <option value="Viúvo" class="form_select_option">Lanche</option>
-                <option value="Viúvo" class="form_select_option">Sobremesa</option>
-                <option value="Viúvo" class="form_select_option">Drink</option>
-              </select>
-
-            </div>
+    <form [formGroup]="receitaForm" (ngSubmit)="onSubmit()" class="container mt-5" style="width: 750px; height: 550px">
+      <mat-tab-group>
+        <mat-tab label="Receita">
+          <div class="mb-3">
+            <label for="nome" class="form-label">Nome</label>
+            <input id="nome" formControlName="nome" class="form-control">
           </div>
-          <div class="col-md-4">
-            <div class="form_grupo">
-              <label for="tempoPreparo" class="form_label">Tempo de Preparo:</label>
-              <input type="time" name="tempoPreparo" class="form_input" id="tempoPreparo" placeholder="Tempo de Preparo"
-                     required style="height: 38px">
-
-            </div>
+          <div class="mb-3">
+            <label for="descricao" class="form-label">Descrição</label>
+            <textarea id="descricao" formControlName="descricao" class="form-control"></textarea>
           </div>
-          <div class="col-md-4">
-            <div class="form_grupo">
-              <div class="form_message">
-                <label for="rendimento" class="form_label"> Rendimento (Porções):</label>
-                <input type="number" name="rendimento" class="form_input" id="rendimento" placeholder="Rendimento" required>
+          <div class="mb-3">
+            <label for="modoPreparo" class="form-label">Modo de Preparo</label>
+            <textarea id="modoPreparo" formControlName="modoPreparo" class="form-control"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="tempoPreparo" class="form-label">Tempo de Preparo</label>
+            <input id="tempoPreparo" formControlName="tempoPreparo" type="number" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="rendimento" class="form-label">Rendimento</label>
+            <input id="rendimento" formControlName="rendimento" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="categoria" class="form-label">Categoria</label>
+            <input id="categoria" formControlName="categoria" type="number" class="form-control">
+          </div>
+          <div class="d-flex justify-content-end mb-3">
+            <button type="button" class="btn btn-primary" (click)="avancarParaIngredientes()">Avançar</button>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="Ingredientes">
+          <div class="mb-3" style="height: 450px; overflow-y: auto;">
+            <div formArrayName="ingredientes">
+              <div *ngFor="let ingrediente of ingredientes.controls; let i=index" [formGroupName]="i" class="mb-3 p-3 border rounded">
+                <div class="mb-3">
+                  <label for="nomeIngrediente" class="form-label">Nome do Ingrediente</label>
+                  <input id="nomeIngrediente" formControlName="nomeIngrediente" class="form-control">
+                </div>
+                <div class="mb-3">
+                  <label for="quantidade" class="form-label">Quantidade</label>
+                  <input id="quantidade" formControlName="quantidade" type="number" class="form-control">
+                </div>
+                <div class="mb-3">
+                  <label for="unidadeMedida" class="form-label">Unidade de Medida</label>
+                  <input id="unidadeMedida" formControlName="unidadeMedida" class="form-control">
+                </div>
+                <button type="button" class="btn btn-success" (click)="saveIngrediente(i)">Salvar Ingrediente</button>
               </div>
             </div>
+            <button type="button" class="btn btn-primary mb-3" (click)="addIngredienteForm()">Adicionar Ingrediente</button>
+
+            <h5>Ingredientes Adicionados</h5>
+            <ul class="list-group mb-3">
+              <li *ngFor="let ingrediente of ingredientesList; let i=index" class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <strong>{{ ingrediente.nomeIngrediente }}</strong> - {{ ingrediente.quantidade }} {{ ingrediente.unidadeMedida }}
+                </div>
+                <button type="button" class="btn btn-danger" (click)="removeIngrediente(i)">Remover</button>
+              </li>
+            </ul>
           </div>
-        </div>
-
-
-
-
-
-
-        <div class="form_grupo">
-          <div class="form_message">
-
-            <label for="descricao" class="form_message_label"> Descrição:</label>
-            <textarea name="descricao" id="descricao" cols="30" rows="3" class="form_input message_input"
-                      required placeholder="Descrição resumida da receita"></textarea>
-
+          <div class="d-flex justify-content-between mb-3">
+            <button type="button" class="btn btn-primary" (click)="voltarParaReceita()">Voltar</button>
+            <button type="submit" class="btn btn-success">Salvar Receita</button>
           </div>
-        </div>
-
-        <div class="form_grupo">
-          <div class="form_message">
-
-            <label for="modo_preparo" class="form_message_label"> Modo de Preparo:</label>
-            <textarea name="modo_preparo" id="modo_preparo" cols="30" rows="3" class="form_input message_input"
-                      required placeholder="Modo de Preparo da receita"></textarea>
-
-          </div>
-        </div>
-
-      </form>
-
-      <!--      </div>&lt;!&ndash;container_form&ndash;&gt;-->
-      <!--      <mat-card-actions class="action-buttons">-->
-      <!--        <button mat-raised-button color="primary" type="submit" *ngIf="!isUpdate">Salvar</button>-->
-      <!--        <button mat-raised-button color="warn" type="button" (click)="onUpdate()" *ngIf="isUpdate">Salvar</button>-->
-      <!--        <button mat-raised-button color="warn" type="button" (click)="onCancel()">Cancelar</button>-->
-      <!--      </mat-card-actions>-->
-    </div>
+        </mat-tab>
+      </mat-tab-group>
+    </form>
   </div>
 </div>

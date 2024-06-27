@@ -20,8 +20,8 @@ export class AppComponent {
 
   openDialog(): void {
     const dialogRef =  this.dialog.open(AddRecipeComponent, {
-      width: '700px',
-      height: '800px',
+      width: '800px',
+      height: '650px',
     });
     dialogRef.afterClosed().subscribe(result => {
       this.openDialogSucsess();

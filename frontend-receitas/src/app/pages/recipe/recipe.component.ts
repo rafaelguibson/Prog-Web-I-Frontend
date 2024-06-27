@@ -1,37 +1,70 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {MatTableDataSource} from "@angular/material/table";
-import {MatPaginator} from "@angular/material/paginator";
-
-export interface Ingrediente {
-  nomeIngrediente: string;
-  quantidade: number;
-  unidadeMedida: string;
-}
-
-
+import { Component, OnInit} from '@angular/core';
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {RecipeHttpServiceService} from "../../service/recipe-http-service.service";
+import {Receita} from "../../model/receita";
+import {Ingrediente} from "../../model/ingrediente";
 
 @Component({
   selector: 'app-recipe',
   templateUrl: './recipe.component.html',
   styleUrl: './recipe.component.css'
 })
-export class RecipeComponent implements OnInit {
-  ELEMENT_DATA: Ingrediente[] = [
-    {nomeIngrediente: 'Farinha de trigo', quantidade: 2, unidadeMedida: 'xícaras'},
-    {nomeIngrediente: 'Açúcar', quantidade: 2, unidadeMedida: 'xícaras'},
-    {nomeIngrediente: 'Cacau em pó', quantidade: 1, unidadeMedida: 'xícara'},
-    {nomeIngrediente: 'Fermento em pó', quantidade: 1, unidadeMedida: 'colher de chá'},
-    {nomeIngrediente: 'Sal', quantidade: 1, unidadeMedida: 'pitada'},
-    {nomeIngrediente: 'Ovos', quantidade: 2, unidadeMedida: 'unidades'},
-    {nomeIngrediente: 'Leite', quantidade: 1, unidadeMedida: 'xícara'},
-    {nomeIngrediente: 'Óleo vegetal', quantidade: 1, unidadeMedida: 'xícara'},
-    {nomeIngrediente: 'Essência de baunilha', quantidade: 1, unidadeMedida: 'colher de chá'},
-    {nomeIngrediente: 'Água quente', quantidade: 1, unidadeMedida: 'xícara'}
-  ];
+export class RecipeComponent{
+  receitaForm: FormGroup;
+  ingredientesList: Ingrediente[] = [];
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  constructor(private fb: FormBuilder, private receitaService: RecipeHttpServiceService) {
+    this.receitaForm = this.fb.group({
+      nome: ['', Validators.required],
+      descricao: ['', Validators.required],
+      modoPreparo: ['', Validators.required],
+      tempoPreparo: ['', Validators.required],
+      rendimento: ['', Validators.required],
+      categoria: ['', Validators.required],
+      ingredientes: this.fb.array([])
+    });
+  }
 
-  ngOnInit() { }
+  get ingredientes(): FormArray {
+    return this.receitaForm.get('ingredientes') as FormArray;
+  }
 
+  addIngredienteForm() {
+    const ingrediente = this.fb.group({
+      nomeIngrediente: ['', Validators.required],
+      quantidade: ['', Validators.required],
+      unidadeMedida: ['', Validators.required]
+    });
+    this.ingredientes.push(ingrediente);
+  }
 
+  saveIngrediente(index: number) {
+    const ingredienteForm = this.ingredientes.at(index);
+    const ingrediente: Ingrediente = {
+      id: 0, // id temporário, será gerado no backend
+      nomeIngrediente: ingredienteForm.value.nomeIngrediente,
+      quantidade: ingredienteForm.value.quantidade,
+      unidadeMedida: ingredienteForm.value.unidadeMedida,
+    };
+    this.ingredientesList.push(ingrediente);
+    this.ingredientes.removeAt(index);
+  }
+
+  removeIngrediente(index: number) {
+    this.ingredientesList.splice(index, 1);
+  }
+
+  onSubmit() {
+    if (this.receitaForm.valid) {
+      const receita: Receita = {
+        ...this.receitaForm.value,
+        ingredientes: this.ingredientesList
+      };
+      this.receitaService.salvar(receita).subscribe(response => {
+        console.log('Receita cadastrada com sucesso!', response);
+        this.receitaForm.reset();
+        this.ingredientesList = [];
+      });
+    }
+  }
 }

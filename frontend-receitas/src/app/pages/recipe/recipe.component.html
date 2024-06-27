@@ -1,1 +1,16 @@
-<p>recipe works!</p>
+<div class="container">
+  <div class="align-content-center div-content">
+    <mat-list>
+      <ng-container *ngFor="let ingrediente of ELEMENT_DATA; let i = index">
+        <mat-list-item >
+          <mat-icon mat-button color="black" style="cursor: pointer;color: black; padding-top: 5px">remove</mat-icon>
+          <span style="color: black">
+
+            {{ingrediente.quantidade}} {{ingrediente.unidadeMedida}} de {{ingrediente.nomeIngrediente}}</span>
+          <span style="color: black"><hr></span>
+        </mat-list-item>
+        <mat-divider *ngIf="i < ELEMENT_DATA.length - 1"></mat-divider>
+      </ng-container>
+    </mat-list>
+  </div>
+</div>

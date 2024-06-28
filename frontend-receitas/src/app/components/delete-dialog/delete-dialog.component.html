@@ -1,0 +1,25 @@
+<div class="panel panel-primary" >
+  <div class="dialog-title panel-heading">
+    <span class="header-space">Deletar Receita</span>
+    <a (click)="fecharModal()" style="cursor: pointer;"><i class="bi bi-x-circle-fill" matTooltip="Fechar Modal"></i></a>
+  </div>
+
+  <div class="panel-body">
+    <div  class="text-center" style="padding-top: 20px;">
+      <span style="font-size: 18px;">Tem certeza que deseja excluir a receita: </span>
+      <p><strong style="font-size: 20px">{{data.receita.nome}}?</strong></p>
+
+    </div>
+    <div style="width: 100%; margin-top: 10px; display: flex; justify-content: space-around;">
+
+      <button  mat-dialog-close class="btn btn-danger button-no">
+        <span class="spn-space">Não</span>
+        <i class="bi bi-x-lg icon-btn-no"></i>
+      </button>
+
+      <button  (click)="deleteMonitorador(data.receita)" cdkFocusInitial class="btn btn-success button-yes">
+        <span class="spn-space">Sim</span>
+        <i class="bi bi-check-circle icon-btn-yes"></i>
+      </button>
+    </div>
+  </div>

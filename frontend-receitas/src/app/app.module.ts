@@ -29,6 +29,8 @@ import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
 import {MatTabsModule} from "@angular/material/tabs";
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
+import {MatDialogClose} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import {MatTabsModule} from "@angular/material/tabs";
     RegisterComponent,
     LoginComponent,
     RecipeComponent,
-    AddRecipeComponent
+    AddRecipeComponent,
+    DeleteDialogComponent,
+    RecipeComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +73,8 @@ import {MatTabsModule} from "@angular/material/tabs";
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTabsModule
+    MatTabsModule,
+    MatDialogClose
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: `pt-BR`},

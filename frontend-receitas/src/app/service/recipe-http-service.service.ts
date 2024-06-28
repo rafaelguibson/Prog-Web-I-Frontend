@@ -45,6 +45,10 @@ export class RecipeHttpServiceService {
 
 
   excluir(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    const headers = {
+      'Authorization': 'Bearer ' + localStorage.getItem('auth-token')
+    };
+
+    return this.http.delete<void>(`${this.baseUrl}/${id}`, { headers });
   }
 }

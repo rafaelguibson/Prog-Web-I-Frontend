@@ -11,9 +11,13 @@ import {Receita} from "../../model/receita";
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+
+
   loginForm!: FormGroup;
   errorMensagem: string = '';
   showFeedbackPanel: boolean = false;
+
+
   constructor(private router: Router, private authService:AuthenticationHttpclientService,private fb: FormBuilder) {
     this.loginForm = this.fb.group({
       email: ['', Validators.required, Validators.email],
@@ -22,6 +26,7 @@ export class LoginComponent {
   }
 
   submit(){
+
     this.authService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
       next: (data) => {
         console.log(data);
@@ -47,6 +52,8 @@ export class LoginComponent {
     }, 5000); // 5000 milissegundos = 5 segundos
   }
 
-
+  redirectToRegister(){
+    this.router.navigate(['register']);
+  }
 
 }

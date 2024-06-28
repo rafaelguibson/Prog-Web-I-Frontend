@@ -45,7 +45,8 @@
             <label for="categoria" class="form-label">Categoria</label>
             <input id="categoria" formControlName="categoria" type="number" class="form-control">
           </div>
-          <div class="d-flex justify-content-end mb-3">
+          <div class="d-flex justify-content-between mb-3">
+            <button type="button" class="btn btn-danger" (click)="fecharModal()">Fechar</button>
             <button type="button" class="btn btn-primary" (click)="avancarParaIngredientes()">Avançar</button>
           </div>
         </mat-tab>

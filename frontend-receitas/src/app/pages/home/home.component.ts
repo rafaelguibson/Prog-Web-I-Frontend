@@ -4,7 +4,7 @@ import {RecipeHttpServiceService} from "../../service/recipe-http-service.servic
 import {AddRecipeComponent} from "../add-recipe/add-recipe.component";
 import {MatDialog} from "@angular/material/dialog";
 import {RecipeComponent} from "../recipe/recipe.component";
-import {Add} from "@mui/icons-material";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit{
   recipe:Receita[] = [];
 
   constructor(private recipeService:RecipeHttpServiceService,
-              public dialog:MatDialog,
+              public dialog:MatDialog, router: Router
   ) { }
 
   ngOnInit(): void {
@@ -63,4 +63,6 @@ export class HomeComponent implements OnInit{
       });
     });
   }
+
+
 }

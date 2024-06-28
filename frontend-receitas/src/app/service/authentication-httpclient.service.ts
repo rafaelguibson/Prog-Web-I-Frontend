@@ -13,6 +13,15 @@ export class AuthenticationHttpclientService {
   constructor(private httpClient: HttpClient, public router: Router) {
   }
 
+  register(username: string, email: string, password: string): Observable<any> {
+    return this.httpClient.post<any>(this.apiUrl + "/register", { username, email, password }).pipe(
+      tap(value => {
+        localStorage.setItem("auth-token", value.token);
+        localStorage.setItem("username", value.name);
+      })
+    );
+  }
+
   login(email: string, password: string) {
     return this.httpClient.post<LoginResponse>(this.apiUrl + "/login", {email, password}).pipe(
       tap(value => {

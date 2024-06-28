@@ -19,16 +19,17 @@
             <input type="email"
                    placeholder="Digite seu Email."
                    formControlName="email"
-                   required >
+                   >
             <input type="password"
                    formControlName="password"
                    placeholder="Digite sua senha."
-                   required>
-            <div class="align-items-center"><button class="center-button" (click)="submit()">Entrar</button></div>
+                   >
+            <div class="align-items-center" style="width:  300px">
+              <button class="center-button" (click)="redirectToRegister()" style="background: darkorange">Cadastre-se</button>
+              <button class="center-button" (click)="submit()">Entrar</button>
+            </div>
           </form>
-          <div class="align-items-center">
-            <div class="signup"><a href="#"><b>Cadastre-se</b></a></div>
-          </div>
+
         </div>
       </div>
 

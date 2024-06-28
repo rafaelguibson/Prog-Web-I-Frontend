@@ -39,7 +39,7 @@ export class AppComponent {
     if(localStorage.getItem('auth-tkon')) {
       this.router.navigate(['home']);
     }
-    this.router.navigate(['home']);
+    this.router.navigate(['']);
   }
 
   logout() {
@@ -47,5 +47,12 @@ export class AppComponent {
     this.router.navigate(['']);
   }
 
+  register() {
+    this.router.navigate(['register']);
+  }
+  login() {
+    localStorage.removeItem('auth-token');
+    this.router.navigate(['']);
+  }
   protected readonly localStorage = localStorage;
 }

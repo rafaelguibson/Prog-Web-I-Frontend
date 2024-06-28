@@ -9,7 +9,7 @@
   <img src="/assets/logo.png" alt="Logo laboratorio" class="img-logo">
 
   <span class="header-space"></span>
-  <button mat-button><span class="btn-menu" *ngIf="localStorage.getItem('auth-token')"  (click)="navigateToHome()">Home</span></button>
+  <button mat-button *ngIf="localStorage.getItem('auth-token')" ><span class="btn-menu"  (click)="navigateToHome()">Home</span></button>
   <button mat-button *ngIf="localStorage.getItem('auth-token')"><span class="btn-menu" (click)="openDialog()" >Adicionar Receita</span></button>
 
   <!--  <button >-->
@@ -18,8 +18,8 @@
   <mat-menu #menu="matMenu">
     <button mat-menu-item *ngIf="localStorage.getItem('auth-token')">Conta</button>
     <button mat-menu-item (click)="logout()" *ngIf="localStorage.getItem('auth-token')">Sair</button>
-    <button mat-menu-item *ngIf="!localStorage.getItem('auth-token')">Login</button>
-    <button mat-menu-item (click)="logout()" *ngIf="!localStorage.getItem('auth-token')">Cadastre-se</button>
+    <button mat-menu-item (click)="login()" *ngIf="!localStorage.getItem('auth-token')">Login</button>
+    <button mat-menu-item (click)="register()" *ngIf="!localStorage.getItem('auth-token')">Cadastre-se</button>
   </mat-menu>
 
 </mat-toolbar>
@@ -32,11 +32,12 @@
 
   <mat-sidenav-content class="content" [style.margin-left]="sidenavWidth()" style="max-width: 100vw">
           <router-outlet></router-outlet>
-      <div id="container" style="margin-top: 40px; width: 100%">
-        <div id="footer">
-          <p style="color: black; font-weight: bolder">Autor: Rafael Guibson - Disciplina: Programação Web I - 2024-1</p>
-        </div>
+
+    <div id="container" style="margin-top: 40px; width: 100%">
+      <div id="footer">
+        <p style="color: black; font-weight: bolder">Autor: Rafael Guibson - Disciplina: Programação Web I - 2024-1</p>
       </div>
+    </div>
 
   </mat-sidenav-content>
 </mat-sidenav-container>

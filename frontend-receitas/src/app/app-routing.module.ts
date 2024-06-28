@@ -5,11 +5,14 @@ import {HomeComponent} from "./pages/home/home.component";
 import {AutGuardService} from "./service/aut-guard.service";
 import {RecipeComponent} from "./pages/recipe/recipe.component";
 import {LoginComponent} from "./pages/login/login.component";
+import {AddRecipeComponent} from "./pages/add-recipe/add-recipe.component";
+
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path:'home', component: HomeComponent, canActivate: [AutGuardService] },
-  { path:'recipe', component: RecipeComponent },
+  { path:'recipe', component: RecipeComponent , canActivate: [AutGuardService] },
+  { path:'addRecipe', component: AddRecipeComponent , canActivate: [AutGuardService] },
 ];
 
 @NgModule({

@@ -12,7 +12,11 @@ export class RecipeHttpServiceService {
   constructor(private http: HttpClient) { }
 
   salvar(receitaDTO: Receita): Observable<Receita> {
-    return this.http.post<Receita>(this.baseUrl, receitaDTO);
+    const headers = {
+      'Authorization': 'Bearer ' + localStorage.getItem('auth-token')
+    };
+
+    return this.http.post<Receita>(this.baseUrl, receitaDTO, { headers });
   }
 
   atualizar(id: number, receitaDTO: Receita): Observable<Receita> {
@@ -24,23 +28,19 @@ export class RecipeHttpServiceService {
   }
 
   deletar(id:Number): Observable<Receita> {
-    return this.http.delete<Receita>(`${this.baseUrl}/${id}`);
-  }
-
-  listarTodos(): Observable<Receita[]> {
-    // const tokenString = localStorage.getItem('auth-token');
-    // let token: { accessToken: string } = { accessToken: '' };
-    //
-    // if (tokenString) {
-    //   token = JSON.parse(tokenString);
-    //   console.log(token);
-    // }
-
     const headers = {
       'Authorization': 'Bearer ' + localStorage.getItem('auth-token')
     };
 
-    return this.http.get<Receita[]>(this.baseUrl, { headers });
+    return this.http.delete<Receita>(`${this.baseUrl}/${id}`, { headers });
+  }
+
+  listarTodos(): Observable<Receita[]> {
+    const headers = {
+      'Authorization': 'Bearer ' + localStorage.getItem('auth-token')
+    };
+
+    return this.http.get<Receita[]>(this.baseUrl + '/sorted', { headers });
   }
 
 

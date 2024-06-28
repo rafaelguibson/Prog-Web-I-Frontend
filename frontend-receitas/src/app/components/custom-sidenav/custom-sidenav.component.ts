@@ -23,12 +23,12 @@ export class CustomSidenavComponent {
     {
       icon: 'home',
       label: 'Inicio',
-      route: 'agendamentos'
+      route: 'home'
     },
     {
       icon: 'note_add',
       label: 'Adicionar Receita',
-      route: 'content'
+      route: 'addRecipe'
     },
     {
       icon: 'analytics',
@@ -43,5 +43,6 @@ export class CustomSidenavComponent {
   ]);
 
   profilePicSize = computed(() => this.sideNavCollapsed() ? '32' : '100');
+
 
 }

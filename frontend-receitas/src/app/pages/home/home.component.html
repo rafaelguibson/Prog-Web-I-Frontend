@@ -4,9 +4,9 @@
     <div *ngFor="let item of recipe; let i = index" class="col-md-2">
       <div class="policy-p-card">
         <div class="date">
-          <mat-icon>delete</mat-icon>
+          <mat-icon mat-button (click)="deleteRecipe(item)" style="cursor: pointer">delete</mat-icon>
           <hr>
-          <mat-icon >edit</mat-icon>
+          <mat-icon mat-button (click)="editRecipe(item)" style="cursor: pointer">edit</mat-icon>
         </div>
         <div class="policy-image">
           <img src="/assets/p1.jpeg" alt="P1">
@@ -17,7 +17,7 @@
             {{ item.descricao }}
           </p>
         </div>
-        <a href="#" class="read-more">Continuar Lendo... <i class="fa fa-caret-right"></i></a>
+        <a href="#" class="read-more" (click)="openDialogRecipe()">Continuar Lendo... <i class="fa fa-caret-right"></i></a>
       </div>
     </div>
   </div>

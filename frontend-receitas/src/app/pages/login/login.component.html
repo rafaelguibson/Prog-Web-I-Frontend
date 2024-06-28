@@ -1,1 +1,38 @@
-<p>login works!</p>
+<mat-card class="mat-elevation-z8">
+  <mat-card-content>
+    <div class="body">
+      <div class="main">
+        <div class="header">
+          <h2><i><span class="border_text">Acesso Cliente</span> </i>
+
+          </h2>
+          <span>
+          <img src="/assets/logo.png" alt="" style="width: 20%;">
+        </span>
+        </div>
+
+        <div class="contactus" >
+          <div class="alert alert-danger alert-div" role="alert" *ngIf="false">
+<!--            <strong>{{}}</strong>-->
+          </div>
+          <form [formGroup]="loginForm" style="margin: 0; border: 0">
+            <input type="email"
+                   placeholder="Digite seu Email."
+                   formControlName="email"
+                   required >
+            <input type="password"
+                   formControlName="password"
+                   placeholder="Digite sua senha."
+                   required>
+            <div class="align-items-center"><button class="center-button" (click)="submit()">Entrar</button></div>
+          </form>
+          <div class="align-items-center">
+            <div class="signup"><a href="#"><b>Cadastre-se</b></a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </mat-card-content>
+</mat-card>

@@ -3,7 +3,7 @@ import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {RecipeHttpServiceService} from "../../service/recipe-http-service.service";
 import {Receita} from "../../model/receita";
 import {Ingrediente} from "../../model/ingrediente";
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-recipe',
@@ -14,7 +14,10 @@ export class RecipeComponent{
   receitaForm: FormGroup;
   ingredientesList: Ingrediente[] = [];
 
-  constructor(private fb: FormBuilder, private receitaService: RecipeHttpServiceService, @Inject(MAT_DIALOG_DATA) public data: {data: Receita}) {
+  constructor(private fb: FormBuilder, private receitaService: RecipeHttpServiceService,
+              public dialogRef: MatDialogRef<RecipeComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: Receita
+              ) {
     this.receitaForm = this.fb.group({
       nome: ['', Validators.required],
       descricao: ['', Validators.required],

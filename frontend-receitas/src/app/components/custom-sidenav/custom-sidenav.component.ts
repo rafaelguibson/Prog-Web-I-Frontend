@@ -26,7 +26,7 @@ export class CustomSidenavComponent {
       route: 'agendamentos'
     },
     {
-      icon: 'library_books',
+      icon: 'note_add',
       label: 'Adicionar Receita',
       route: 'content'
     },

@@ -1,24 +1,27 @@
-import {Component, Inject, OnInit, ViewChild} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, UntypedFormGroup, Validators} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {Receita} from "../../model/receita";
-import {RecipeHttpServiceService} from "../../service/recipe-http-service.service";
-import {Ingrediente} from "../../model/ingrediente";
-import {MatTabGroup} from "@angular/material/tabs";
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { Receita } from "../../model/receita";
+import { RecipeHttpServiceService } from "../../service/recipe-http-service.service";
+import { Ingrediente } from "../../model/ingrediente";
+import { MatTabGroup } from "@angular/material/tabs";
 
 @Component({
   selector: 'app-add-recipe',
   templateUrl: './add-recipe.component.html',
   styleUrl: './add-recipe.component.css'
 })
-export class AddRecipeComponent{
+export class AddRecipeComponent implements OnInit {
   receitaForm: FormGroup;
   ingredientesList: Ingrediente[] = [];
   showFeedbackPanel: boolean = false;
+  isUpdate: boolean = false;
   errorMensagem: string = '';
   @ViewChild(MatTabGroup) tabGroup!: MatTabGroup;
 
-  constructor(private fb: FormBuilder, private receitaService: RecipeHttpServiceService, @Inject(MAT_DIALOG_DATA) public data: {data: Receita}) {
+  constructor(private fb: FormBuilder, private receitaService: RecipeHttpServiceService,
+              public dialogRef: MatDialogRef<AddRecipeComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: Receita) {
     this.receitaForm = this.fb.group({
       nome: ['', Validators.required],
       descricao: ['', Validators.required],
@@ -28,6 +31,17 @@ export class AddRecipeComponent{
       categoria: ['', Validators.required],
       ingredientes: this.fb.array([])
     });
+
+    if (this.data) {
+      this.isUpdate = true;
+    }
+  }
+
+  ngOnInit() {
+    if (this.data != null) {
+      this.receitaForm.patchValue(this.data);
+      this.ingredientesList = this.data.ingredientes;
+    }
   }
 
   get ingredientes(): FormArray {
@@ -46,7 +60,6 @@ export class AddRecipeComponent{
   saveIngrediente(index: number) {
     const ingredienteForm = this.ingredientes.at(index);
     const ingrediente: Ingrediente = {
-
       nomeIngrediente: ingredienteForm.value.nomeIngrediente,
       quantidade: ingredienteForm.value.quantidade,
       unidadeMedida: ingredienteForm.value.unidadeMedida,
@@ -66,10 +79,11 @@ export class AddRecipeComponent{
         ingredientes: this.ingredientesList
       };
       this.receitaService.salvar(receita).subscribe(response => {
-        console.log('Receita cadastrada com sucesso!', response);
-        this.receitaForm.reset();
-        this.ingredientesList = [];
-      },
+          console.log('Receita cadastrada com sucesso!', response);
+          this.receitaForm.reset();
+          this.ingredientesList = [];
+          this.fecharModal();
+        },
         (error) => {
           this.showErrorMensage(error.error)
         });
@@ -83,8 +97,9 @@ export class AddRecipeComponent{
   voltarParaReceita() {
     this.tabGroup.selectedIndex = 0; // seleciona a primeira aba (receita)
   }
-  showErrorMensage(msg: string ) {
-    this.errorMensagem = msg ;
+
+  showErrorMensage(msg: string) {
+    this.errorMensagem = msg;
     this.showFeedbackPanel = true;
     this.scheduleMessageClear();
   }
@@ -95,5 +110,9 @@ export class AddRecipeComponent{
       this.errorMensagem = ''; // Limpar a mensagem após 5 segundos
       this.showFeedbackPanel = false;
     }, 5000); // 5000 milissegundos = 5 segundos
+  }
+
+  fecharModal(): void {
+    this.dialogRef.close();
   }
 }

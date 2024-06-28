@@ -1,7 +1,7 @@
 import {Ingrediente} from "./ingrediente";
 
 export interface Receita {
-  id?: number;
+  id: number;
   nome: string;
   descricao: string;
   modoPreparo: string;

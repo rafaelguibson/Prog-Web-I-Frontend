@@ -4,6 +4,7 @@ import {RecipeHttpServiceService} from "../../service/recipe-http-service.servic
 import {AddRecipeComponent} from "../add-recipe/add-recipe.component";
 import {MatDialog} from "@angular/material/dialog";
 import {RecipeComponent} from "../recipe/recipe.component";
+import {Add} from "@mui/icons-material";
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,9 @@ import {RecipeComponent} from "../recipe/recipe.component";
 export class HomeComponent implements OnInit{
   recipe:Receita[] = [];
 
-  constructor(private recipeService:RecipeHttpServiceService, public dialog:MatDialog) { }
+  constructor(private recipeService:RecipeHttpServiceService,
+              public dialog:MatDialog,
+  ) { }
 
   ngOnInit(): void {
     this.recipeService.listarTodos().subscribe((data: Receita[]) => {
@@ -22,10 +25,37 @@ export class HomeComponent implements OnInit{
     });
   }
 
-  openDialog(): void {
+  openDialogRecipe(): void {
     const dialogRef =  this.dialog.open(RecipeComponent, {
       width: '800px',
       height: '650px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      // this.openDialogSucsess();
+      this.recipeService.listarTodos().subscribe((data: Receita[]) => {
+      });
+    });
+  }
+
+  deleteRecipe(receita: Receita){
+    this.recipeService.deletar(receita.id).subscribe(
+      (data: Receita) => {
+        this.recipeService.listarTodos().subscribe((data: Receita[]) => {
+          console.log(data);
+          this.recipe = data;
+        });
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  editRecipe(receita:Receita) {
+    const dialogRef =  this.dialog.open(AddRecipeComponent, {
+      width: '800px',
+      height: '650px',
+      data: receita
     });
     dialogRef.afterClosed().subscribe(result => {
       // this.openDialogSucsess();

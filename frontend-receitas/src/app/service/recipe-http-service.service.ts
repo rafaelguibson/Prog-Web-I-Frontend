@@ -23,6 +23,10 @@ export class RecipeHttpServiceService {
     return this.http.get<Receita>(`${this.baseUrl}/${id}`);
   }
 
+  deletar(id:Number): Observable<Receita> {
+    return this.http.delete<Receita>(`${this.baseUrl}/${id}`);
+  }
+
   listarTodos(): Observable<Receita[]> {
     // const tokenString = localStorage.getItem('auth-token');
     // let token: { accessToken: string } = { accessToken: '' };
@@ -32,11 +36,11 @@ export class RecipeHttpServiceService {
     //   console.log(token);
     // }
 
-    // const headers = {
-    //   'Authorization': 'Bearer ' + localStorage.getItem('auth-token')
-    // };
+    const headers = {
+      'Authorization': 'Bearer ' + localStorage.getItem('auth-token')
+    };
 
-    return this.http.get<any>(this.baseUrl/*, { headers }*/);
+    return this.http.get<Receita[]>(this.baseUrl, { headers });
   }
 
 

@@ -73,20 +73,24 @@ export class AddRecipeComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.receitaForm.valid) {
-      const receita: Receita = {
-        ...this.receitaForm.value,
-        ingredientes: this.ingredientesList
-      };
-      this.receitaService.salvar(receita).subscribe(response => {
-          console.log('Receita cadastrada com sucesso!', response);
-          this.receitaForm.reset();
-          this.ingredientesList = [];
-          this.fecharModal();
-        },
-        (error) => {
-          this.showErrorMensage(error.error)
-        });
+    if(this.data) {
+
+    } else {
+      if (this.receitaForm.valid) {
+        const receita: Receita = {
+          ...this.receitaForm.value,
+          ingredientes: this.ingredientesList
+        };
+        this.receitaService.salvar(receita).subscribe(response => {
+            console.log('Receita cadastrada com sucesso!', response);
+            this.receitaForm.reset();
+            this.ingredientesList = [];
+            this.fecharModal();
+          },
+          (error) => {
+            this.showErrorMensage(error.error)
+          });
+      }
     }
   }
 

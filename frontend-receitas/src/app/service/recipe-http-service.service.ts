@@ -20,7 +20,10 @@ export class RecipeHttpServiceService {
   }
 
   atualizar(id: number, receitaDTO: Receita): Observable<Receita> {
-    return this.http.put<Receita>(`${this.baseUrl}/${id}`, receitaDTO);
+    const headers = {
+      'Authorization': 'Bearer ' + localStorage.getItem('auth-token')
+    };
+    return this.http.put<Receita>(`${this.baseUrl}/${id}`, receitaDTO, { headers });
   }
 
   buscarPorId(id: number): Observable<Receita> {
